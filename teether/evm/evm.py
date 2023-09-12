@@ -289,7 +289,9 @@ def run(program, state=None, code=None, ctx=None, check_initialized=False, trace
 
 
 def ctx_or_symbolic(v, ctx, xid):
-    return ctx.get(v, z3.BitVec('%s_%d' % (v, xid), 256))
+    if v not in ctx:
+        ctx[v] = z3.BitVec('%s_%d' % (v, xid), 256)
+    return ctx[v]
 
 
 def addr(expr):
