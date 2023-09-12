@@ -4,7 +4,7 @@ from collections import defaultdict
 from teether.cfg.cfg import CFG
 from teether.cfg.disassembly import generate_BBs
 from teether.cfg.opcodes import external_data
-from teether.evm.evm import run, run_symbolic
+from teether.evm.evm import run, run_symbolic, run_symbolic_onop
 from teether.evm.exceptions import IntractablePath, ExternalData
 from teether.explorer.forward import ForwardExplorer
 from teether.slicing import interesting_slices, slice_to_program
@@ -65,6 +65,9 @@ class Project(object):
 
     def run_symbolic(self, path, inclusive=False):
         return run_symbolic(self.prg, path, self.code, inclusive=inclusive)
+
+    def run_symbolic_onop(self, path, inclusive=False):
+        return run_symbolic_onop(self.prg, path, self.code, inclusive=inclusive)
 
     def get_constraints(self, instructions, args=None, inclusive=False, find_sstore=False):
         # only check instructions that have a chance to reach root
