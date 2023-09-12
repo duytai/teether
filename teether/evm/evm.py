@@ -858,7 +858,7 @@ def run_symbolic_onop(program, path, code=None, state=None, ctx=None, inclusive=
         mem = state.memory
         state.gas -= ins.gas
         # Valid operations
-        yield state, ins
+        yield ctx, state, ins 
         # Pushes first because they are very frequent
         if 0x60 <= opcode <= 0x7f:
             stk.append(int.from_bytes(ins.arg, byteorder='big'))
