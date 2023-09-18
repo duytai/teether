@@ -1033,6 +1033,8 @@ def run_symbolic_onop(program, path, code=None, state=None, ctx=None, inclusive=
         elif opcode < 0x40:
             if op == 'SHA3':
                 s0, s1 = stk.pop(), stk.pop()
+                if s1 - s0 == 64:
+                    s0 = s0 + 32
                 mem.extend(s0, s1)
                 mm = mem.read(s0, s1)
                 if not isinstance(mm, SymRead) and all(concrete(m) for m in mm):
