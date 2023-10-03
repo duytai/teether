@@ -1194,7 +1194,7 @@ def run_symbolic_onop(program, path, code=None, state=None, ctx=None, inclusive=
                     stk.append(v)
             elif op == 'SSTORE':
                 s0, s1 = stk.pop(), stk.pop()
-                storage[s0] = s1
+                # storage[s0] = s1
             elif op == 'JUMP':
                 s0 = stk.pop()
                 if not concrete(s0):
